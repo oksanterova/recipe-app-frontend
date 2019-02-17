@@ -1,6 +1,6 @@
 <h2>Recipes</h2>
 <ul class="recipes">
   <li *ngFor="let recipe of recipes" (click)="onSelect(recipe)">
-    <a routerLink="/recipes/{{ recipe.label }}" class="recipe">{{recipe.label | uppercase}}</a>
+    <a [routerLink]="['/recipes/detail']" [queryParams]="{uri: recipe.uri}" class="recipe">{{recipe.label | uppercase}}</a>
   </li>
 </ul>
