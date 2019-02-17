@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from 'rxjs';
+
 import { Recipe } from "./recipe";
 import { RECIPES } from "./mock-recipes";
 
@@ -8,7 +10,11 @@ import { RECIPES } from "./mock-recipes";
 export class EdamamService {
   constructor() {}
 
-  getRecipes(): Array<Recipe> {
-    return RECIPES;
+  getRecipes(): Observable<Recipe[]> {
+    return of(RECIPES);
+  }
+
+  getRecipe(label: string): Observable<Recipe> {
+    return of(RECIPES.find(recipe => recipe.label === label));
   }
 }

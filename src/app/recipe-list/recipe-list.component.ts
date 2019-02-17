@@ -8,15 +8,24 @@ import { Recipe } from "../recipe";
   styleUrls: ["./recipe-list.component.css"]
 })
 export class RecipeListComponent implements OnInit {
-  constructor(private edamamService: EdamamService) {}
-
+  
+  selectedRecipe: Recipe;
+  
   recipes: Recipe[];
 
+  constructor(private edamamService: EdamamService) {}
+
+
   getRecipes(): void {
-    this.recipes = this.edamamService.getRecipes();
+    this.edamamService.getRecipes()
+    .subscribe(recipes => this.recipes = recipes);
   }
 
   ngOnInit() {
     this.getRecipes();
+  }
+
+  onSelect(recipe: Recipe): void {
+    this.selectedRecipe = recipe;
   }
 }
