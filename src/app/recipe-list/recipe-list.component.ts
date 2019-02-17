@@ -1,19 +1,9 @@
-import {
-  Component,
-  OnInit,
-  AfterContentInit,
-  AfterViewInit
-} from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import {
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  tap
-} from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
 import { ThemealdbService } from "../themealdb.service";
-import { Recipe } from "../recipe";
+import { Recipe, Category } from "../recipe";
 
 @Component({
   selector: "app-recipe-list",
@@ -22,6 +12,7 @@ import { Recipe } from "../recipe";
 })
 export class RecipeListComponent implements OnInit, AfterViewInit {
   recipes$: Observable<Recipe[]>;
+  categories$: Observable<Category[]>;
 
   private queries = new Subject<string>();
 
@@ -48,6 +39,8 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
         }
       })
     );
+
+    this.categories$ = this.themealdbService.getCategories();
   }
   ngAfterViewInit() {
     this.queries.next("");

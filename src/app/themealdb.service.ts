@@ -3,18 +3,29 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 import { map, filter, retryWhen, concatMap, delay } from "rxjs/operators";
 
-import { Recipe } from "./recipe";
+import { Recipe, Category } from "./recipe";
 
-interface Meals {
-  meals?: Meal[];
+interface ThemealdbMeals {
+  meals?: ThemealdbMeal[];
 }
 
-interface Meal {
+interface ThemealdbMeal {
   idMeal: string;
   strMeal: string;
   strCategory: string;
   strArea: string;
   strMealThumb: string;
+}
+
+interface ThemealdbCategories {
+  categories: ThemealdbCategory[];
+}
+
+interface ThemealdbCategory {
+  idCategory: string;
+  strCategory: string;
+  strCategoryThumb: string;
+  strCategoryDescription: string;
 }
 
 @Injectable({
@@ -23,7 +34,7 @@ interface Meal {
 export class ThemealdbService {
   constructor(private http: HttpClient) {}
 
-  createRecipe(meal: Meal): Recipe {
+  createRecipe(meal: ThemealdbMeal): Recipe {
     return {
       id: meal.idMeal,
       label: meal.strMeal,
@@ -31,18 +42,25 @@ export class ThemealdbService {
     };
   }
 
+  createCategory(category: ThemealdbCategory): Category {
+    return {
+      label: category.strCategory,
+      image: category.strCategoryThumb
+    };
+  }
+
   getLatest(): Observable<Recipe[]> {
     const url = "https://www.themealdb.com/api/json/v1/1/latest.php";
 
     return this.http
-      .get<Meals>(url)
+      .get<ThemealdbMeals>(url)
       .pipe(map(res => res.meals.map(this.createRecipe)));
   }
 
   search(query: string): Observable<Recipe[]> {
     const url = "https://www.themealdb.com/api/json/v1/1/search.php";
 
-    return this.http.get<Meals>(url, { params: { s: query } }).pipe(
+    return this.http.get<ThemealdbMeals>(url, { params: { s: query } }).pipe(
       map(res => {
         if (res.meals) {
           return res.meals.map(this.createRecipe);
@@ -53,11 +71,19 @@ export class ThemealdbService {
     );
   }
 
+  getCategories(): Observable<Category[]> {
+    const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+
+    return this.http
+      .get<ThemealdbCategories>(url)
+      .pipe(map(res => res.categories.map(this.createCategory)));
+  }
+
   getRecipe(id: string): Observable<Recipe> {
     const url = "https://www.themealdb.com/api/json/v1/1/lookup.php";
 
     return this.http
-      .get<Meals>(url, { params: { i: id } })
+      .get<ThemealdbMeals>(url, { params: { i: id } })
       .pipe(map(res => this.createRecipe(res.meals[0])));
   }
 }

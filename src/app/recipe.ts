@@ -3,3 +3,8 @@ export class Recipe {
   label: string;
   image: string;
 }
+
+export class Category {
+  label: string;
+  image: string;
+}
