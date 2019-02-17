@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Recipe } from "../recipe";
-import { EdamamService } from "../edamam.service";
+import { ThemealdbService } from "../themealdb.service";
 
 @Component({
   selector: "app-recipe-detail",
@@ -15,7 +15,7 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private edamamService: EdamamService,
+    private themealdbService: ThemealdbService,
     private location: Location
   ) {}
 
@@ -24,9 +24,9 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   getRecipe(): void {
-    const uri = this.route.snapshot.queryParamMap.get("uri");
-    this.edamamService
-      .getRecipe(uri)
+    const id = this.route.snapshot.paramMap.get("id");
+    this.themealdbService
+      .getRecipe(id)
       .subscribe(recipe => (this.recipe = recipe));
   }
 

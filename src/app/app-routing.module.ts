@@ -5,7 +5,7 @@ import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 
 const routes: Routes = [
-  { path: "recipes/detail", component: RecipeDetailComponent },
+  { path: "recipes/:id", component: RecipeDetailComponent },
   { path: "recipes", component: RecipeListComponent }
 ];
 

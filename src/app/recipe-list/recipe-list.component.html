@@ -1,6 +1,9 @@
 <h2>Recipes</h2>
+
+<input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
 <ul class="recipes">
-  <li *ngFor="let recipe of recipes" (click)="onSelect(recipe)">
-    <a [routerLink]="['/recipes/detail']" [queryParams]="{uri: recipe.uri}" class="recipe">{{recipe.label | uppercase}}</a>
+  <li *ngFor="let recipe of recipes$ | async">
+    <a routerLink="/recipes/{{ recipe.id }}" class="recipe">{{recipe.label | uppercase}}</a>
   </li>
 </ul>

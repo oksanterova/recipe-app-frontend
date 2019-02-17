@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EdamamService } from './edamam.service';
+import { ThemealdbService } from './themealdb.service';
 
-describe('EdamamService', () => {
+describe('ThemealdbService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EdamamService = TestBed.get(EdamamService);
+    const service: ThemealdbService = TestBed.get(ThemealdbService);
     expect(service).toBeTruthy();
   });
 });
