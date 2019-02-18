@@ -79,6 +79,20 @@ export class ThemealdbService {
       .pipe(map(res => res.categories.map(this.createCategory)));
   }
 
+  filter(category: string): Observable<Recipe[]> {
+    const url = "https://www.themealdb.com/api/json/v1/1/filter.php";
+
+    return this.http.get<ThemealdbMeals>(url, { params: { c: category } }).pipe(
+      map(res => {
+        if (res.meals) {
+          return res.meals.map(this.createRecipe);
+        } else {
+          return [];
+        }
+      })
+    );
+  }
+
   getRecipe(id: string): Observable<Recipe> {
     const url = "https://www.themealdb.com/api/json/v1/1/lookup.php";
 

@@ -4,24 +4,23 @@ body {
 
 /* You can add global styles to this file, and also import other style files */
 
-.recipe-card {
-  height: 270px;
-}
-
-.recipe-image {
-  height: 270px;
+.active-category {
+  color: red !important;
 }
 
 .card {
   float: left;
-  width: 33.333%;
+  width: 30%;
   padding: .75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
   border: 0;
+  height: 320px;
 }
 
 .card>img {
   margin-bottom: .75rem;
+  height: 270px;
 }
 
 /*

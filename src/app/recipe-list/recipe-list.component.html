@@ -17,7 +17,12 @@
 
         <ul class="nav flex-column">
           <li class="nav-item" *ngFor="let category of categories$ | async">
-            <a class="nav-link" href="#">{{ category.label }}</a>
+
+            <a class="nav-link" (click)="filter(category.label)" routerLink="/recipes/" [queryParams]="{category:
+              category.label}"
+              [ngClass]="{'active-category': category.label==activeCategory}">
+              {{ category.label }}
+            </a>
           </li>
         </ul>
       </div>
@@ -34,9 +39,9 @@
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <ul class="row">
-          <li class="recipe-card card" *ngFor="let recipe of recipes$ | async">
+          <li class="card" *ngFor="let recipe of recipes$ | async">
             <a routerLink="/recipes/{{ recipe.id }}" class="recipe">{{recipe.label | uppercase}}</a>
-            <img class="recipe-image" src="{{ recipe.image }}" />
+            <img src="{{ recipe.image }}" />
           </li>
         </ul>
       </div>
