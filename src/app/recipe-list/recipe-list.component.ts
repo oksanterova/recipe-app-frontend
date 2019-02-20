@@ -11,6 +11,8 @@ import {
 
 import { ThemealdbService } from "../themealdb.service";
 import { Recipe, Category } from "../recipe";
+import { FavoritesService } from "../favorites.service";
+import { Favorite } from "../favorite";
 
 class Filter {
   query?: string;
@@ -26,11 +28,13 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
   recipes$: Observable<Recipe[]>;
   categories$: Observable<Category[]>;
   activeCategory?: string;
+  favorites: Favorite[];
 
   private filters = new Subject<Filter>();
 
   constructor(
     private themealdbService: ThemealdbService,
+    private favoritesService: FavoritesService,
     private route: ActivatedRoute
   ) {}
 
@@ -40,6 +44,36 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
 
   filter(category: string): void {
     this.filters.next({ category: category });
+  }
+
+  addFavorite(recipe: Recipe): void {
+    this.favoritesService
+      .addFavorite({
+        recipe_id: recipe.id,
+        recipe_label: recipe.label,
+        recipe_image: recipe.image
+      })
+      .subscribe(favorite => {
+        this.favorites.push(favorite);
+      });
+  }
+
+  deleteFavorite(recipe: Recipe): void {
+    const favorite = this.favorites.find(f => f.recipe_id === recipe.id);
+
+    if (favorite) {
+      this.favoritesService.deleteFavorite(favorite.id).subscribe(_ => {
+        this.favorites = this.favorites.filter(f => f !== favorite);
+      });
+    }
+  }
+
+  isFavorite(recipe: Recipe): boolean {
+    if (this.favorites === undefined) {
+      return false;
+    }
+
+    return this.favorites.some(f => f.recipe_id === recipe.id);
   }
 
   ngOnInit() {
@@ -70,6 +104,10 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
         }
       })
     );
+
+    this.favoritesService
+      .getFavorites()
+      .subscribe(favorites => (this.favorites = favorites));
 
     this.categories$ = this.themealdbService.getCategories();
   }

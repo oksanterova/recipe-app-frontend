@@ -3,16 +3,16 @@
 
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Search</span>
+        <h6 class="sidebar-heading px-3 mt-1 mb-1 text-muted">
+          Search
         </h6>
 
-        <div class="nav-item">
+        <div class="nav-item px-3 text-muted">
           <input #searchBox id="search-box" (input)="search(searchBox.value)" />
         </div>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Categories</span>
+        <h6 class="sidebar-heading px-3 mt-1 mb-1 text-muted">
+          Categories
         </h6>
 
         <ul class="nav flex-column">
@@ -29,22 +29,21 @@
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <h2>Recipes</h2>
-        </div>
-
+      <div class="mb-2 mb-md-0 pt-3 pb-2 mb-3 border-bottom">
+        <h2>Recipes</h2>
       </div>
 
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <ul class="row">
-          <li class="card" *ngFor="let recipe of recipes$ | async">
-            <a routerLink="/recipes/{{ recipe.id }}" class="recipe">{{recipe.label | uppercase}}</a>
-            <img src="{{ recipe.image }}" />
-          </li>
-        </ul>
-      </div>
+      <ul class="d-flex flex-wrap align-items-center pt-3">
+        <li class="card" *ngFor="let recipe of recipes$ | async">
+          <div>
+            <a routerLink="/recipes/{{ recipe.id }}" class="recipe-title">{{ recipe.label }}</a>
+            <button *ngIf="!isFavorite(recipe)" (click)="addFavorite(recipe)" class="no-heart float-right"></button>
+            <button *ngIf="isFavorite(recipe)" (click)="deleteFavorite(recipe)" class="heart float-right"></button>
+          </div>
+
+          <img src="{{ recipe.image }}" />
+        </li>
+      </ul>
     </main>
   </div>
 </div>

@@ -1,0 +1,23 @@
+<div class="cointainer-fluid">
+  <div class="row">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+      <div class="mb-2 mb-md-0 pt-3 pb-2 mb-3 border-bottom">
+        <h2>Favorites</h2>
+      </div>
+
+      <ul class="d-flex flex-wrap align-items-center pt-3">
+        <li class="card" *ngFor="let favorite of favorites">
+          <div>
+            <a routerLink="/recipes/{{ favorite.recipe_id }}" class="recipe-title">{{ favorite.recipe_label }}</a>
+            <button type="button" class="close" aria-label="Close" (click)="deleteFavorite(favorite)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <img src="{{ favorite.recipe_image }}" />
+        </li>
+      </ul>
+    </main>
+  </div>
+</div>
