@@ -1,11 +1,27 @@
-<div *ngIf="recipe">
+<div *ngIf="recipe" class="px-4">
 
-  <h2>{{recipe.name | uppercase}} Details</h2>
-  <div>
-    <label>name:
-      <input [(ngModel)]="recipe.label" placeholder="title">
-    </label>
-  </div>
-  <img [src]="[recipe.image]" />
-  <button (click)="goBack()">go back</button>
+  <h2>
+    <a href="javascript:void(0)" (click)="goBack()"><strong>&larr;</strong></a>
+    {{recipe.label}}
+  </h2>
+  <img class="img-fluid" [src]="[recipe.image]" />
+
+  <h3 class="pt-3 mb-1">Ingredients</h3>
+
+  <dl class="row pt-3">
+    <ng-container *ngFor="let ingredient of recipe.ingredients">
+      <dt class="col-2">{{ ingredient.measure }}</dt>
+      <dd class="col-10">{{ ingredient.label }}</dd>
+    </ng-container>
+  </dl>
+
+  <h3 class="pt-3 mb-1">Instructions</h3>
+
+  <ul class="row pt-3 instructions">
+    <li *ngFor="let instruction of recipe.instructions" class="col-sm-12 pt-1">
+      {{ instruction }}
+    </li>
+  </ul>
+
+
 </div>

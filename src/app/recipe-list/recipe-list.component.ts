@@ -40,10 +40,17 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
 
   search(query: string): void {
     this.filters.next({ query: query });
+    document.querySelector("#recipes").scrollIntoView();
   }
 
   filter(category: string): void {
     this.filters.next({ category: category });
+    document.querySelector("#recipes").scrollIntoView();
+  }
+
+  removeFilter(): void {
+    this.filters.next({});
+    document.querySelector("#recipes-sidebar").scrollIntoView();
   }
 
   addFavorite(recipe: Recipe): void {

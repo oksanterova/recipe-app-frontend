@@ -15,13 +15,6 @@ export class InMemoryDataService implements InMemoryDbService {
         recipe_label: "Teriyaki Chicken Casserole",
         recipe_image:
           "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg"
-      },
-      {
-        id: 1,
-        recipe_id: "52966",
-        recipe_label: "Chocolate Caramel Crispy",
-        recipe_image:
-          "https://www.themealdb.com/images/media/meals/1550442508.jpg"
       }
     ];
     return { favorites };

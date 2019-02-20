@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 import { map, filter, retryWhen, concatMap, delay } from "rxjs/operators";
 
-import { Recipe, Category } from "./recipe";
+import { Recipe, Category, Ingredient } from "./recipe";
 
 interface ThemealdbMeals {
   meals?: ThemealdbMeal[];
@@ -15,6 +15,7 @@ interface ThemealdbMeal {
   strCategory: string;
   strArea: string;
   strMealThumb: string;
+  strInstructions: string;
 }
 
 interface ThemealdbCategories {
@@ -35,10 +36,29 @@ export class ThemealdbService {
   constructor(private http: HttpClient) {}
 
   createRecipe(meal: ThemealdbMeal): Recipe {
+    const obj = meal as Object;
+    const ingredients: Ingredient[] = [];
+
+    const instructions = meal.strInstructions
+      .split("\n")
+      .map(line => line.trim())
+      .filter(line => line.length > 0);
+
+    for (var i = 1; i <= 20; i++) {
+      const label = obj["strIngredient" + i];
+      const measure = obj["strMeasure" + i];
+
+      if (label && measure) {
+        ingredients.push({ label, measure });
+      }
+    }
+
     return {
       id: meal.idMeal,
       label: meal.strMeal,
-      image: meal.strMealThumb
+      image: meal.strMealThumb,
+      ingredients,
+      instructions
     };
   }
 

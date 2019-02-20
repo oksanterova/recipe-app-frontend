@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
+import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Favorite } from "./favorite";
 
@@ -24,7 +24,7 @@ export class FavoritesService {
     return this.http.post<Favorite>(this.baseUrl, favorite, httpOptions);
   }
 
-    deleteFavorite(id: number): Observable<void> {
+  deleteFavorite(id: number): Observable<void> {
     const url = `${this.baseUrl}/${id}`;
 
     return this.http.delete<void>(url, httpOptions);

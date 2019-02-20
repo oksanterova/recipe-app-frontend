@@ -6,9 +6,10 @@ import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 import { FavoriteListComponent } from "./favorite-list/favorite-list.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "recipes", pathMatch: "full" },
   { path: "recipes/:id", component: RecipeDetailComponent },
   { path: "recipes", component: RecipeListComponent },
-  { path: "favorites", component: FavoriteListComponent}
+  { path: "favorites", component: FavoriteListComponent }
 ];
 
 @NgModule({
