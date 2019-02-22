@@ -44,8 +44,8 @@
         <li class="recipe recipe-3" *ngFor="let recipe of recipes$ | async">
           <div>
             <a routerLink="/recipes/{{ recipe.id }}" class="recipe-title">{{ recipe.label }}</a>
-            <button *ngIf="!isFavorite(recipe)" (click)="addFavorite(recipe)" class="no-heart float-right"></button>
-            <button *ngIf="isFavorite(recipe)" (click)="deleteFavorite(recipe)" class="heart float-right"></button>
+            <button *ngIf="hasToken && !isFavorite(recipe)" (click)="addFavorite(recipe)" class="no-heart float-right"></button>
+            <button *ngIf="hasToken && isFavorite(recipe)" (click)="deleteFavorite(recipe)" class="heart float-right"></button>
           </div>
 
           <a class="recipe-img" routerLink="/recipes/{{ recipe.id }}">

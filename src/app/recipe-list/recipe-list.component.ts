@@ -13,6 +13,7 @@ import { ThemealdbService } from "../themealdb.service";
 import { Recipe, Category } from "../recipe";
 import { FavoritesService } from "../favorites.service";
 import { Favorite } from "../favorite";
+import { AuthService } from "../auth.service";
 
 class Filter {
   query?: string;
@@ -29,12 +30,14 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
   categories$: Observable<Category[]>;
   activeCategory?: string;
   favorites: Favorite[];
+  hasToken: boolean;
 
   private filters = new Subject<Filter>();
 
   constructor(
     private themealdbService: ThemealdbService,
     private favoritesService: FavoritesService,
+    private authService: AuthService,
     private route: ActivatedRoute
   ) {}
 
@@ -112,9 +115,15 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
       })
     );
 
-    this.favoritesService
-      .getFavorites()
-      .subscribe(favorites => (this.favorites = favorites));
+    this.hasToken = this.authService.currentToken() != null;
+
+    if (this.hasToken) {
+      this.favoritesService
+        .getFavorites()
+        .subscribe(favorites => (this.favorites = favorites));
+    } else {
+      this.favorites = [];
+    }
 
     this.categories$ = this.themealdbService.getCategories();
   }
