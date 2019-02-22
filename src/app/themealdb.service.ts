@@ -39,7 +39,7 @@ export class ThemealdbService {
     const obj = meal as Object;
     const ingredients: Ingredient[] = [];
 
-    const instructions = meal.strInstructions
+    const instructions = (meal.strInstructions || "")
       .split("\n")
       .map(line => line.trim())
       .filter(line => line.length > 0);
