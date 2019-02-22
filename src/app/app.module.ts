@@ -13,6 +13,7 @@ import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 import { FavoriteListComponent } from "./favorite-list/favorite-list.component";
 import { LoginComponent } from "./login/login.component";
 import { JwtInterceptor } from "./jwt.interceptor";
+import { ErrorInterceptor } from "./error.interceptor";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { JwtInterceptor } from "./jwt.interceptor";
     ReactiveFormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
