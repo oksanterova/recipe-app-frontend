@@ -4,12 +4,19 @@ import { Routes, RouterModule } from "@angular/router";
 import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 import { FavoriteListComponent } from "./favorite-list/favorite-list.component";
+import { AuthGuard } from "./auth.guard";
+import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "recipes", pathMatch: "full" },
   { path: "recipes/:id", component: RecipeDetailComponent },
   { path: "recipes", component: RecipeListComponent },
-  { path: "favorites", component: FavoriteListComponent }
+  { path: "login", component: LoginComponent },
+  {
+    path: "favorites",
+    component: FavoriteListComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

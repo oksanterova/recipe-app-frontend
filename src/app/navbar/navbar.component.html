@@ -2,12 +2,25 @@
   <a class="navbar-brand" routerLink="#">Mmm-tasty</a>
   <div id="navbarNavAltMarkup">
     <ul class="navbar-nav">
-      <li>
-        <a class="nav-item nav-link" routerLink="/recipes">Recipes</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/recipes">Recipes</a>
       </li>
-      <li>
-        <a class="nav-item nav-link" routerLink="/favorites">Favorites</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/favorites">Favorites</a>
       </li>
+      <ng-container *ngIf="(user$ | async) as user">
+        <li class="nav-item" *ngIf="user">
+          <a class="navbar-right nav-link">{{ user.name }}</a>
+        </li>
+        <li class="nav-item" *ngIf="user">
+          <a class="navbar-right nav-link" routerLink="/logout">Logout</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="!hasToken">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ng-container>
     </ul>
   </div>
 </nav>
