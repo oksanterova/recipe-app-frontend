@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService, User } from "../auth.service";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-navbar",
@@ -15,13 +15,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.authService.me();
-    this.hasToken = this.authService.currentToken() != null;
+
+    this.authService.token.subscribe(token => {
+      if (token) {
+        this.hasToken = true;
+      } else {
+        this.hasToken = false;
+      }
+    });
   }
 
   logout() {
-    this.authService.logout().subscribe(_ => {
-      this.hasToken = false;
-      this.user$ = of(null);
-    });
+    this.authService.logout();
   }
 }

@@ -1,13 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Observable, Subject, of } from "rxjs";
-import {
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  map,
-  tap
-} from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
 import { ThemealdbService } from "../themealdb.service";
 import { Recipe, Category } from "../recipe";
@@ -115,15 +109,17 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
       })
     );
 
-    this.hasToken = this.authService.currentToken() != null;
-
-    if (this.hasToken) {
-      this.favoritesService
-        .getFavorites()
-        .subscribe(favorites => (this.favorites = favorites));
-    } else {
-      this.favorites = [];
-    }
+    this.authService.token.subscribe(token => {
+      if (token) {
+        this.hasToken = true;
+        this.favoritesService
+          .getFavorites()
+          .subscribe(favorites => (this.favorites = favorites));
+      } else {
+        this.hasToken = false;
+        this.favorites = [];
+      }
+    });
 
     this.categories$ = this.themealdbService.getCategories();
   }

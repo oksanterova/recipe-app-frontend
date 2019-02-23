@@ -8,7 +8,7 @@ import {
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-import { Router, RouterStateSnapshot } from "@angular/router";
+import { Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 
 @Injectable()
@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError(err => {
         if (err.status === 401) {
           this.authService.removeToken();
-          //location.reload(true);
+          location.reload(true);
         }
 
         const error = err.error.message || err.statusText;
