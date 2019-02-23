@@ -12,6 +12,7 @@ import { FavoriteListComponent } from "./favorite-list/favorite-list.component";
 import { LoginComponent } from "./login/login.component";
 import { JwtInterceptor } from "./jwt.interceptor";
 import { ErrorInterceptor } from "./error.interceptor";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ErrorInterceptor } from "./error.interceptor";
     RecipeListComponent,
     RecipeDetailComponent,
     FavoriteListComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

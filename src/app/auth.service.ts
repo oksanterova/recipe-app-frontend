@@ -24,10 +24,11 @@ export class AuthService {
     this.token.next(localStorage.getItem("token"));
   }
 
-  private baseUrl = "http://recipe-app-backend.test/api/auth";
-  private logoutUrl = `${this.baseUrl}/logout`;
-  private loginUrl = `${this.baseUrl}/login`;
-  private meUrl = `${this.baseUrl}/me`;
+  private baseUrl = "http://recipe-app-backend.test/api";
+  private registerUrl = `${this.baseUrl}/register`;
+  private logoutUrl = `${this.baseUrl}/auth/logout`;
+  private loginUrl = `${this.baseUrl}/auth/login`;
+  private meUrl = `${this.baseUrl}/auth/me`;
 
   token = new ReplaySubject<string>(1);
 
@@ -39,6 +40,16 @@ export class AuthService {
         localStorage.setItem("token", data.access_token);
         this.token.next(data.access_token);
         return this.me();
+      })
+    );
+  }
+
+  register(name: string, email: string, password: string): Observable<User> {
+    const credentials = { name, email, password };
+
+    return this.http.post<any>(this.registerUrl, credentials, httpOptions).pipe(
+      switchMap(data => {
+        return this.login(email, password);
       })
     );
   }

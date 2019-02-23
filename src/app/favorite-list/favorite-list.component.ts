@@ -23,4 +23,24 @@ export class FavoriteListComponent implements OnInit {
       this.favorites = this.favorites.filter(f => f !== favorite);
     });
   }
+
+  editFavorite(favorite: Favorite): void {
+    const label = prompt("Please enter new label", favorite.recipe_label);
+
+    if (label) {
+      this.favoritesService
+        .updateFavorite(favorite.id, label)
+        .subscribe(newFavorite => {
+          this.favorites = this.favorites.map(f => {
+            if (f.id == newFavorite.id) {
+              return newFavorite;
+            } else {
+              return f;
+            }
+          });
+        });
+    } else {
+      // cancelled
+    }
+  }
 }

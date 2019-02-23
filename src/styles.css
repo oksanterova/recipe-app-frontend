@@ -9,6 +9,33 @@ body {
   overflow-x: hidden;
 }
 
+.fa-pencil {
+  display: block;
+  height: 32px;
+  width: 32px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAPFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQLyYwAAAAE3RSTlMAAQIEBxA0UFGRmsDBw8XHztX7RYqz/gAAAH1JREFUKM+lkcsOgzAMBJcY2vCoS5n//9ceUFBC3FN9nFG8Vla6TcrPpGBsA7eAvyA0M0TGzPw07ybH3C+TGw6XyQ33RzGeGj6VN1V44eBmc8TbW2se7/mb7z/48dl7LmcZ14ALBtkafDZIp7mVACCNR1cOgIalrzPKrUTPvzUGD31NMUelAAAAAElFTkSuQmCC");
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.fa-close {
+  display: block;
+  height: 32px;
+  width: 32px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAgVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtFS1lAAAAKnRSTlMAAQMFBgcJDEdLWFlbXF1odXeFiIuRkpSVl5itr7m6vsfIytXX4ubo6f1TzZtTAAAAr0lEQVQoz22Q1xaCQAxEZ6mKBStiwS7q/P8H+rAlAdmn5N6zJ5kAQPleGoQ3areRrVYkD8EUJJvIc3JvhFtTksoUrjsCH1eyNsLJBAuKEX4GTB26R6iuMTrGv1sMDBnH/0zgPXMXDhiZ+80Ux0T9qM0w12ba28qb2V8Oa+Yyt2PGsmcmW2+AVu2v8iSodC6z8/cEoqaT15pXDmfkDpXnQHTiRd1nzWfu61SfB6kBgB9Z7jbscyDPiwAAAABJRU5ErkJggg==");
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.fa-close:hover,
+.fa-pencil:hover {
+  opacity: 1;
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 .active-category {
@@ -28,7 +55,7 @@ body {
   margin-bottom: 1rem;
   margin-right: 1rem;
   min-width: 340px;
-  height: 375px;
+  height: 365px;
 }
 
 .recipe-3 {
@@ -40,7 +67,6 @@ body {
 }
 
 .recipe-img {
-  margin-bottom: .75rem;
   height: 300px;
 }
 

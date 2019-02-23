@@ -32,4 +32,10 @@ export class FavoritesService {
 
     return this.http.delete<void>(url, httpOptions);
   }
+
+  updateFavorite(id: number, label: string): Observable<Favorite> {
+    const url = `${this.baseUrl}/${id}`;
+
+    return this.http.patch<Favorite>(url, { recipe_label: label }, httpOptions);
+  }
 }
