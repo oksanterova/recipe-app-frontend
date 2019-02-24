@@ -19,7 +19,10 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     let token = this.authService.currentToken();
 
-    if (token && request.url.startsWith("http://recipe-app-backend.test")) {
+    // const baseUrl = "http://recipe-api.oksanakanterova.chas.academy";
+    const baseUrl = "http://recipe-api.oksanakanterova.chas.academy";
+
+    if (token && request.url.startsWith(baseUrl)) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

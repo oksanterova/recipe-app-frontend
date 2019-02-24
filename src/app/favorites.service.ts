@@ -14,7 +14,9 @@ const httpOptions = {
 export class FavoritesService {
   constructor(private http: HttpClient) {}
 
-  private baseUrl = "http://recipe-app-backend.test/api/favorite";
+  // private baseUrl = "http://recipe-app-backend.test/api/favorite";
+  private baseUrl =
+    "http://recipe-api.oksanakanterova.chas.academy/api/favorite";
 
   /** GET favorites from the server */
   getFavorites(): Observable<Favorite[]> {

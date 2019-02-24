@@ -24,7 +24,9 @@ export class AuthService {
     this.token.next(localStorage.getItem("token"));
   }
 
-  private baseUrl = "http://recipe-app-backend.test/api";
+  // private baseUrl = "http://recipe-app-backend.test/api";
+  private baseUrl = "http://recipe-api.oksanakanterova.chas.academy/api";
+
   private registerUrl = `${this.baseUrl}/register`;
   private logoutUrl = `${this.baseUrl}/auth/logout`;
   private loginUrl = `${this.baseUrl}/auth/login`;
